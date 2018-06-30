@@ -1,2 +1,3 @@
-# big-data-analysis-with-scala-and-spark
-Big Data Analysis with Scala and Spark (course)
+# Big Data Analysis with Scala and Spark (course)
+
+https://www.coursera.org/learn/scala-spark-big-data/home
