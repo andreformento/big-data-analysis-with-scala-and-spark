@@ -2,7 +2,7 @@
 
 In the terminal:
 
-```
+```shell
 sbt test
 sbt run
 ```
