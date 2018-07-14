@@ -2,4 +2,7 @@
 
 https://www.coursera.org/learn/scala-spark-big-data/home
 
-Latest: https://www.coursera.org/learn/scala-spark-big-data/lecture/D5o7O/latency
+Submiting:
+```shell
+sbt submit andreformento.sc@gmail.com generated_token
+```
