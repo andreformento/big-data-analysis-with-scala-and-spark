@@ -1,4 +1,4 @@
-# Programming Assignment: Wikipedia
+# Programming Assignment: Wikipedia (SQL mode)
 
 Download resources:
 
