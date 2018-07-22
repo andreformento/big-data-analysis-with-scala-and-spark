@@ -1,3 +1,5 @@
+*.dat
+
 ### STS ###
 .apt_generated
 .classpath
