@@ -4,5 +4,6 @@ https://www.coursera.org/learn/scala-spark-big-data/home
 
 Submiting:
 ```shell
-sbt submit andreformento.sc@gmail.com generated_token
+sbt
+submit andreformento.sc@gmail.com generated_token
 ```
