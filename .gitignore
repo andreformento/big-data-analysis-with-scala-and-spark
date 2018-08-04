@@ -1,4 +1,5 @@
 *.dat
+*.csv
 
 ### STS ###
 .apt_generated
