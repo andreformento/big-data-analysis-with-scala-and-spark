@@ -1,4 +1,4 @@
-# Programming Assignment: Wikipedia
+# Practice Programming Assignment: StackOverflow
 
 Download resources:
 
