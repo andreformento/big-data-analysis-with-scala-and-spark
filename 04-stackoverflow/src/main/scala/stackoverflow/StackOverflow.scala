@@ -110,9 +110,16 @@ class StackOverflow extends Serializable {
       highScore
     }
 
-//    val value = grouped.
+    val resultList: RDD[(Question, HighScore)] = grouped.map(row => {
+      val calculatedScore: HighScore = answerHighScore(row._2.map(tuple => tuple._2).toArray)
+      val question: Question = row._2.map(tuple => tuple._1).find(a => true).get // TODO ???
 
-    ???
+      val tupleResult = (question, calculatedScore)
+      tupleResult
+    })
+
+
+    resultList
   }
 
 
