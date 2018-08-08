@@ -1,11 +1,9 @@
 package stackoverflow
 
-import org.apache.spark.SparkConf
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
+import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
-import annotation.tailrec
-import scala.reflect.ClassTag
+
+import scala.annotation.tailrec
 
 /** A raw stackoverflow posting, either a question or an answer */
 case class Posting(postingType: Int, id: Int, acceptedAnswer: Option[Int], parentId: Option[QID], score: Int, tags: Option[String]) extends Serializable
@@ -139,7 +137,10 @@ class StackOverflow extends Serializable {
       }
     }
 
-    ???
+    scored.
+      map(row => (firstLangInTag(row._1.tags, langs), row._1.score)).
+      filter(row => row._1.nonEmpty).
+      map(row => (row._1.get * langSpread, row._2))
   }
 
 
@@ -293,14 +294,26 @@ class StackOverflow extends Serializable {
   //
   //
   def clusterResults(means: Array[(Int, Int)], vectors: RDD[(LangIndex, HighScore)]): Array[(String, Double, Int, Int)] = {
-    val closest = vectors.map(p => (findClosest(p, means), p))
-    val closestGrouped = closest.groupByKey()
+    val closest: RDD[(HighScore, (LangIndex, HighScore))] = vectors.map(p => (findClosest(p, means), p))
+    val closestGrouped: RDD[(HighScore, Iterable[(LangIndex, HighScore)])] = closest.groupByKey()
+
+
 
     val median = closestGrouped.mapValues { vs =>
-      val langLabel: String   = ??? // most common language in the cluster
-      val langPercent: Double = ??? // percent of the questions in the most common language
-      val clusterSize: Int    = ???
-      val medianScore: Int    = ???
+      val langIndex: LangIndex = vs.groupBy(x => x._1).mapValues(x => x.size).maxBy(x => x._2)._1
+      val langLabel: String   = langs(langIndex / langSpread) // most common language in the cluster
+      val clusterSize: Int    = vs.size
+      val langPercent: Double = vs.count(_._1 == langIndex) / clusterSize * 100 // percent of the questions in the most common language
+
+      val scores = vs.unzip._2.toArray.sorted
+      val medianScore: Int = {
+        val mid: Int = scores.length / 2
+        if (scores.length % 2 == 0) {
+          (scores(mid) + scores(mid - 1)) / 2
+        } else {
+          scores(mid)
+        }
+      }
 
       (langLabel, langPercent, clusterSize, medianScore)
     }
