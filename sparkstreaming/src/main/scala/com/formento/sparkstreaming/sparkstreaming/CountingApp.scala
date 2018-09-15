@@ -5,6 +5,8 @@ import java.io.File
 import org.apache.commons.io.FileUtils
 import org.apache.spark.{SparkConf, SparkContext}
 
+import scala.io.StdIn
+
 /**
   * Use this to test the app locally, from sbt:
   * sbt "run inputFile.txt outputFile.txt"
@@ -20,9 +22,11 @@ object CountingLocalApp extends App {
 
   val conf = new SparkConf()
     .setMaster("local")
-    .setAppName("my awesome app")
+    .setAppName("my counter app")
 
   Runner.run(conf, inputFile, outputFile)
+  println("Press ENTER to finish")
+  StdIn.readLine()
 }
 
 /**
@@ -48,5 +52,16 @@ object Runner {
     val rdd = sc.textFile(inputFile)
     val counts = WordCount.withStopWordsFiltered(rdd)
     counts.saveAsTextFile(outputPath)
+
+    val takeSize = 10
+    val result = counts.
+      takeOrdered(takeSize)(Ordering[Int].reverse.on(_._2)).
+      toList
+
+    println(s"Show $takeSize results by count desc\n")
+    result.foreach(println)
+
+    println("\n")
+    sc.uiWebUrl.foreach(println)
   }
 }
