@@ -6,7 +6,7 @@ final case class Person(firstName: String, lastName: String,
                         country: String, age: Int)
 
 object SimpleExample extends InitSpark {
-  def main(args: Array[String]) = {
+  def main(args: Array[String]):Unit = {
     import spark.implicits._
 
     val version = spark.version

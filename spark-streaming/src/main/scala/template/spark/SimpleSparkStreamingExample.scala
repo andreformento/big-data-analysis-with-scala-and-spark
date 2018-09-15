@@ -1,10 +1,19 @@
 package template.spark
 
-import org.apache.spark.sql.functions._
+import org.apache.spark.sql.SparkSession
 
-object SimpleSparkStreamingExample extends InitSpark {
-  def main(args: Array[String]) = {
+object SimpleSparkStreamingExample {
+  def main(args: Array[String]): Unit = {
+    val spark: SparkSession = SparkSession.builder()
+      .appName("Spark example")
+      .master("local[*]")
+      .config("option", "some-value")
+      .getOrCreate()
+
     import spark.implicits._
+
+    val sc = spark.sparkContext
+    val sqlContext = spark.sqlContext
 
     // Create DataFrame representing the stream of input lines from connection to localhost:9998
     val lines = spark.readStream
@@ -32,6 +41,6 @@ object SimpleSparkStreamingExample extends InitSpark {
     println("Press ENTER to finish")
     scala.io.StdIn.readLine()
 
-    close
+    spark.close()
   }
 }
