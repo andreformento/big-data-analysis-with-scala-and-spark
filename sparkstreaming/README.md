@@ -1,6 +1,19 @@
 # Spark streaming
 
-### Run:
+### Run my first Spark Streaming
+
+Before all, run in separated tab terminal:
+```shell
+nc -lk 9999
+# write some words and press ENTER
+```
+
+Now start Spark Streaming:
+```shell
+# and choose number of SparkStreamingApp class
+```
+
+### Run a simple app:
 
 Local running:
 
