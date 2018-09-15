@@ -2,7 +2,7 @@ package com.formento.sparkstreaming.sparkstreaming
 
 import org.apache.spark.sql.SparkSession
 
-object SparkStreamingApp extends App {
+object FirstSparkStreamingApp extends App {
   println("Before all, run in terminal: `$ nc -lk 9999`")
 
   val spark = SparkSession

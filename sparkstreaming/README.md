@@ -1,6 +1,23 @@
 # Spark streaming
 
-### Run my first Spark Streaming
+_If you want to use an IDE to run examples, maybe you need see in your IDE how to `include dependency with 'provided' scope`_
+
+### Run a simple app (before spark streaming):
+
+Local running:
+
+```shell
+sbt run
+# and choose number of CountingLocalApp class
+```
+
+Or use parameters `sbt "run inputFile.txt /outputPath"`
+
+## Now run Spark Streaming Apps :)
+
+### Simple example with streaming
+
+[Reference](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#quick-example)
 
 Before all, run in separated tab terminal:
 ```shell
@@ -13,16 +30,14 @@ Now start Spark Streaming:
 # and choose number of SparkStreamingApp class
 ```
 
-### Run a simple app:
+### Streaming datasets
 
-Local running:
+[Reference](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#creating-streaming-dataframes-and-streaming-datasets)
 
+Now start Spark Streaming:
 ```shell
-sbt run
-# and choose number of CountingLocalApp class
+# and choose number of StreamingDatasetsApp class
 ```
-
-Or use parameters `sbt "run inputFile.txt /outputPath"`
 
 #### Example of a project creation
 
