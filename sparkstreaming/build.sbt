@@ -10,7 +10,7 @@ lazy val root = (project in file(".")).
     name := "sparkstreaming",
     version := "0.0.1",
 
-    sparkVersion := "2.2.0",
+    sparkVersion := "2.3.1",
     sparkComponents := Seq(),
 
     javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
@@ -22,12 +22,12 @@ lazy val root = (project in file(".")).
     coverageHighlighting := true,
 
     libraryDependencies ++= Seq(
-      "org.apache.spark" %% "spark-streaming" % "2.2.0" % "provided",
-      "org.apache.spark" %% "spark-sql" % "2.2.0" % "provided",
+      "org.apache.spark" %% "spark-streaming" % "2.3.1" % "provided",
+      "org.apache.spark" %% "spark-sql" % "2.3.1" % "provided",
 
       "org.scalatest" %% "scalatest" % "3.0.1" % "test",
       "org.scalacheck" %% "scalacheck" % "1.13.4" % "test",
-      "com.holdenkarau" %% "spark-testing-base" % "2.2.0_0.9.0" % "test" 
+      "com.holdenkarau" %% "spark-testing-base" % "2.3.1_0.10.0" % "test"
     ),
 
     // uses compile classpath for the run task, including "provided" jar (cf http://stackoverflow.com/a/21803413/3827)

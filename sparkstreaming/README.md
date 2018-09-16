@@ -45,7 +45,7 @@ Now start Spark Streaming:
 sbt new holdenk/sparkProjectTemplate.g8 \
         --name=sparkstreaming \
         --organization=com.formento.sparkstreaming \
-        --sparkVersion=2.2.0
+        --sparkVersion=2.3.1
 ```
 
 go inside `cd sparkstreaming` and run :)
@@ -57,3 +57,4 @@ https://github.com/MrPowers/spark-sbt.g8
 http://www.foundweekends.org/giter8/
 https://www.scala-sbt.org/1.x/docs/sbt-new-and-Templates.html
 https://medium.com/@mrpowers/creating-a-spark-project-with-sbt-intellij-sbt-spark-package-and-friends-cc9108751c28
+https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html
