@@ -2,9 +2,9 @@
 
 _If you want to use an IDE to run examples, maybe you need see in your IDE how to `include dependency with 'provided' scope`_
 
-### Run a simple app (before spark streaming):
+### Run
 
-Local running:
+Execute:
 
 ```shell
 sbt run
