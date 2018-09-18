@@ -1,6 +1,5 @@
 package com.formento.kafkasparkstreaming
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SparkSession
 
 object KafkaStreamingApp extends App {
@@ -22,6 +21,4 @@ object KafkaStreamingApp extends App {
     df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
       .as[(String, String)]
 
-
-  }
 }

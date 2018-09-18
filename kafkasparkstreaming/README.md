@@ -11,9 +11,40 @@ sbt run
 # and choose number of KafkaStreamingApp class
 ```
 
-### Kafka
+### Kafka (local)
 
-Before, configure your hosts: `sudo sh -c "sudo echo '127.0.0.1 kafka' >> /etc/hosts"`
+```shell
+wget http://mirror.nbtelecom.com.br/apache/kafka/2.0.0/kafka_2.11-2.0.0.tgz -P kafka-install
+cd kafka-install
+tar -xzf kafka_2.11-2.0.0.tgz
+cd kafka_2.11-2.0.0
+```
+
+Quick-and-dirty single-node ZooKeeper instance: `bin/zookeeper-server-start.sh config/zookeeper.properties`
+
+Now start the Kafka server (in new terminal): `bin/kafka-server-start.sh config/server.properties`
+
+Create a topic named "topic1" (in new terminal)
+```shell
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topic1
+```
+
+Show
+```shell
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+```
+
+Produce a message
+```shell
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic topic1 --property parse.key=true --property key.separator="|"
+```
+
+Consume a message
+```shell
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic1 --from-beginning
+```
+
+### Kafka (compose)
 
 Docker:
 
@@ -50,3 +81,4 @@ docker-compose exec kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-s
 
 - https://spark.apache.org/docs/2.2.0/structured-streaming-programming-guide.html
 - https://spark.apache.org/docs/2.2.0/structured-streaming-kafka-integration.html
+- https://kafka.apache.org/quickstart

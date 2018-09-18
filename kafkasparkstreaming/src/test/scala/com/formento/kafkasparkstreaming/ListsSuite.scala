@@ -1,4 +1,4 @@
-package com.formento.kafkasparkstreaming.kafkasparkstreaming
+package com.formento.kafkasparkstreaming
 
 import org.scalatest.FunSuite
 

@@ -4,7 +4,7 @@ lazy val root = (project in file(".")).
 
   settings(
     inThisBuild(List(
-      organization := "com.formento.kafkasparkstreaming",
+      organization := "com.formento",
       scalaVersion := "2.11.8"
     )),
     name := "kafkasparkstreaming",
@@ -22,9 +22,10 @@ lazy val root = (project in file(".")).
     coverageHighlighting := true,
 
     libraryDependencies ++= Seq(
-      "org.apache.spark" %% "spark-streaming" % "2.3.1" % "provided",
       "org.apache.spark" %% "spark-sql" % "2.3.1" % "provided",
-//      "org.apache.spark" %% "spark-sql-kafka-0-10_2.11" % "2.3.1" % "provided",
+      "org.apache.spark" %% "spark-sql-kafka-0-10" % "2.3.1" % "provided",
+      "org.apache.spark" %% "spark-streaming-kafka-0-10" % "2.3.1" % "provided",
+      "org.apache.spark" %% "spark-streaming" % "2.3.1" % "provided",
 
       "org.scalatest" %% "scalatest" % "3.0.1" % "test",
       "org.scalacheck" %% "scalacheck" % "1.13.4" % "test",

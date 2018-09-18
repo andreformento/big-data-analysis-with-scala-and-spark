@@ -1,4 +1,5 @@
 src/main/resources/output/
+kafka-install/
 
 *.class
 *.log

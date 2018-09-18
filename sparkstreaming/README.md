@@ -44,7 +44,7 @@ Now start Spark Streaming:
 ```shell
 sbt new holdenk/sparkProjectTemplate.g8 \
         --name=sparkstreaming \
-        --organization=com.formento.sparkstreaming \
+        --organization=com.formento \
         --sparkVersion=2.3.1
 ```
 
