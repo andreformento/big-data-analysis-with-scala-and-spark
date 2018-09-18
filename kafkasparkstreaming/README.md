@@ -8,18 +8,18 @@ Execute:
 
 ```shell
 sbt run
-# and choose number of CountingLocalApp class
+# and choose number of KafkaStreamingApp class
 ```
 
 ### Kafka
+
+Before, configure your hosts: `sudo sh -c "sudo echo '127.0.0.1 kafka' >> /etc/hosts"`
 
 Docker:
 
 ```shell
 docker-compose up
 ```
-
-Show Kafka Manager: http://localhost:9000
 
 Create a kafka topic
 ```shell
@@ -48,5 +48,5 @@ docker-compose exec kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-s
 
 ### Reference
 
-- https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html
-- https://github.com/SciSpike/kafka-lab/blob/master/labs/01-Verify-Installation/hello-world-kafka.md
+- https://spark.apache.org/docs/2.2.0/structured-streaming-programming-guide.html
+- https://spark.apache.org/docs/2.2.0/structured-streaming-kafka-integration.html

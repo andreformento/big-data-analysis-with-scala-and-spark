@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
@@ -9,19 +9,9 @@ services:
     ports:
       - "9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
-      # KAFKA_ADVERTISED_HOST_NAME: "${DOCKER_MACHINE_IP}"
-      # KAFKA_ADVERTISED_HOST_NAME: kafka
-      # KAFKA_CREATE_TOPICS: "Topic1:1:3,Topic2:1:1:compact"
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.1.16
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "topic1:1:1"
+      KAFKA_CREATE_TOPICS_SEPARATOR: "|"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
-  # kafka-manager:
-  #   image: andreformento/docker-kafka-manager
-  #   ports:
-  #     - "9000:9000"
-  #   links:
-  #     - zookeeper
-  #     - kafka
-  #   command: ["-Dconfig.file=conf/application.conf", "-Dkafka-manager.zkhosts=zookeeper:2181"]
