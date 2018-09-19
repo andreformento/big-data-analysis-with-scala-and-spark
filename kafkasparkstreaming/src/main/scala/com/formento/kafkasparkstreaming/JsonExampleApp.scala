@@ -2,16 +2,15 @@ package com.formento.kafkasparkstreaming
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.udf
+import org.apache.spark.sql.types._
 
 /*
 produce messages like:
-10|iron maiden
-20|seventh son of a seventh son
-30|when the wild wind blows
-40|if eternity should fail
+id_1|{"query": "iron maiden", "hits": 666, "results": ["somewhere in time", "powerslave", "killers"]}
+id_2|{"query": "seventh son of seventh son", "hits": 12, "results": ["iron maiden", "album", "killers"]}
 */
 
-object UdfsExampleApp extends App {
+object JsonExampleApp extends App {
   val spark = SparkSession
     .builder
     .appName("KafkaStreamingApp")
@@ -28,21 +27,25 @@ object UdfsExampleApp extends App {
     .option("subscribe", "topic1")
     .load()
 
-  spark.udf.register("udf_count_words", udf { text: String => new Udfs().countWords(text) })
+  spark.udf.register("udf_first_result_of_list", udf { list: Seq[String] => new Udfs().firstResultOfList(list) })
 
   val expression = df.selectExpr("CAST(key AS STRING) as key", "CAST(value AS STRING) as value")
     .as[(String, String)]
 
   expression.createOrReplaceTempView("search")
 
+  // get_json_object(value, '$.example.myList')
+
   val table = spark.sql(
     """
     select key,
            value,
-           udf_count_words(value) AS count_words
+           get_json_object(value, '$.results') as result_list--,
+           --udf_first_result_of_list(get_json_object(value, '$.results')) as first_result
       from search
       group by key, value
     """)
+
 
   val console = table.writeStream
     .outputMode("complete")
@@ -53,7 +56,7 @@ object UdfsExampleApp extends App {
 
   class Udfs extends Serializable {
 
-    def countWords(text: String) = text.split(" ").length
+    def firstResultOfList(list: Seq[String]) = list.headOption.getOrElse("")
 
   }
 

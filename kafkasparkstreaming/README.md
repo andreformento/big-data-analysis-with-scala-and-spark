@@ -68,7 +68,7 @@ docker-compose exec kafka /opt/kafka/bin/kafka-console-producer.sh --broker-list
 Consume messages
 ```shell
 docker-compose exec kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic1 --from-beginning
-``` 
+```
 
 
 ## Run Spark Streaming
@@ -82,7 +82,7 @@ sbt run
 # and choose number of ReadFromKafkaAndPrintAtConsoleApp class
 ```
 
-Now you can produce some messages with Kafka and see at Spark application 
+Now you can produce some messages with Kafka and see at Spark application
 
 ## Reference
 
