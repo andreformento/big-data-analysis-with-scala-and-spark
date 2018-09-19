@@ -17,7 +17,7 @@ Quick-and-dirty single-node ZooKeeper instance: `bin/zookeeper-server-start.sh c
 
 Now start the Kafka server (in new terminal): `bin/kafka-server-start.sh config/server.properties`
 
-Create a topic named "topic1" (in new terminal)
+Create a topic named `topic1` (in new terminal)
 ```shell
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topic1
 ```
