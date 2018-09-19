@@ -1,17 +1,10 @@
 # Kafka Spark streaming
 
-_If you want to use an IDE to run examples, maybe you need see in your IDE how to `include dependency with 'provided' scope`_
+## Before run Spark Streaming
 
-### Run
+You need setup and run Kafka
 
-Execute:
-
-```shell
-sbt run
-# and choose number of KafkaStreamingApp class
-```
-
-### Kafka (local)
+### Kafka - local
 
 ```shell
 wget http://mirror.nbtelecom.com.br/apache/kafka/2.0.0/kafka_2.11-2.0.0.tgz -P kafka-install
@@ -44,7 +37,7 @@ Consume a message
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic1 --from-beginning
 ```
 
-### Kafka (compose)
+### Kafka - docker-compose (not working yet)
 
 Docker:
 
@@ -75,10 +68,24 @@ docker-compose exec kafka /opt/kafka/bin/kafka-console-producer.sh --broker-list
 Consume messages
 ```shell
 docker-compose exec kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic1 --from-beginning
+``` 
+
+
+## Run Spark Streaming
+
+_If you want to use an IDE to run examples, maybe you need see in your IDE how to `include dependency with 'provided' scope`_
+
+Execute:
+
+```shell
+sbt run
+# and choose number of ReadFromKafkaAndPrintAtConsoleApp class
 ```
 
-### Reference
+Now you can produce some messages with Kafka and see at Spark application 
 
-- https://spark.apache.org/docs/2.2.0/structured-streaming-programming-guide.html
-- https://spark.apache.org/docs/2.2.0/structured-streaming-kafka-integration.html
+## Reference
+
+- https://spark.apache.org/docs/2.3.1/structured-streaming-programming-guide.html
+- https://spark.apache.org/docs/2.3.1/structured-streaming-kafka-integration.html
 - https://kafka.apache.org/quickstart
